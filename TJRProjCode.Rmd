@@ -1,0 +1,88 @@
+---
+title: "TJRProjCode"
+author: "Timothy Jordan Regis
+output: html_document
+---
+```{r, warning = FALSE, message=FALSE}
+library(tidyverse)
+library(visdat)
+library(skimr)
+library(cesR)
+library(labelled)
+library(ggplot2)
+```
+
+```{r, fig.cap= 'Table 1'}
+get_cescodes()
+```
+
+```{r}
+get_ces('ces2015_web')
+```
+
+```{r, message=FALSE}
+ces2015_web <- to_factor(ces2015_web)
+head(ces2015_web)
+```
+
+```{r}
+ces2015_web_wrk <- ces2015_web %>%
+  filter(vote_for %in% c('The Conservative Party', 'The Liberal Party', 'The New Democratic Party'))
+table(ces2015_web_wrk$vote_for)
+```
+
+```{r, fig.cap='Graph 0.1'}
+ces2015_web_wrk %>% 
+  ggplot(aes(x = vote_for)) + 
+  geom_bar() + 
+  labs(title = 'Number of Voters for Each Party', x = 'Political Party', y = 'Number of Voters') + 
+  theme_minimal()
+```
+
+```{r, fig.cap='Graph 1.1'}
+ces2015_web_wrk %>%
+  ggplot(aes(x = attn_educ, fill = vote_for)) + 
+  geom_bar(color = 'black', position = 'dodge') + 
+  labs(title = 'Importance of Education to Voters', x = 'Attention to Education in the Country', y = 'Number of Voters') + 
+  theme_minimal()
+```
+
+```{r, fig.cap='Graph 1.2'}
+ces2015_web_wrk %>%
+  ggplot(aes(x = spnd_educ, fill = vote_for)) + 
+  geom_bar(color = 'black', position = 'dodge') + 
+  labs(title = 'Education Spending Recommendations by Voters', x = 'How should the Govt. Spend on Education ', y = 'Number of Voters') + 
+  theme_minimal()
+```
+
+```{r, fig.cap='Graph 2.1'}
+ces2015_web_wrk %>%
+  ggplot(aes(x = attn_envi, fill = vote_for)) + 
+  geom_bar(color = 'black', position = 'dodge') + 
+  labs(title = 'Importance of the Environment to Voters', x = 'Attention to the Environment in the Country', y = 'Number of Voters') + 
+  theme_minimal()
+```
+
+```{r, fig.cap='Graph 2.2'}
+ces2015_web_wrk %>%
+  ggplot(aes(x = spnd_envi, fill = vote_for)) + 
+  geom_bar(color = 'black', position = 'dodge') + 
+  labs(title = 'Environmental Spending Recommendations by Voters', x = 'How should the Govt. Spend on the Environment', y = 'Number of Voters') + 
+  theme_minimal()
+```
+
+```{r, fig.cap='Graph 3.1'}
+ces2015_web_wrk %>%
+  ggplot(aes(x = attn_heal, fill = vote_for)) + 
+  geom_bar(color = 'black', position = 'dodge') + 
+  labs(title = 'Importance of Health Care to Voters', x = 'Attention to Health Care in the Country', y = 'Number of Voters') + 
+  theme_minimal()
+```
+
+```{r, fig.cap='Graph 3.2'}
+ces2015_web_wrk %>%
+  ggplot(aes(x = spnd_hlth, fill = vote_for)) + 
+  geom_bar(color = 'black', position = 'dodge') + 
+  labs(title = 'Health Care Spending Recommendations by Voters', x = 'How should the Govt. Spend on Education ', y = 'Number of Voters') + 
+  theme_minimal()
+```
