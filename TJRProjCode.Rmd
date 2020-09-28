@@ -4,6 +4,7 @@ author: "Timothy Jordan Regis
 output: html_document
 ---
 ```{r, warning = FALSE, message=FALSE}
+# Loading Packages
 library(tidyverse)
 library(visdat)
 library(skimr)
@@ -13,25 +14,30 @@ library(ggplot2)
 ```
 
 ```{r, fig.cap= 'Table 1'}
+# Viewing all available ces datasets
 get_cescodes()
 ```
 
 ```{r}
+# Grabbing ces2015_web dataset
 get_ces('ces2015_web')
 ```
 
 ```{r, message=FALSE}
+# Converting dataset to factor form
 ces2015_web <- to_factor(ces2015_web)
 head(ces2015_web)
 ```
 
 ```{r}
+# Filtering Dataset for three most popular Parties
 ces2015_web_wrk <- ces2015_web %>%
   filter(vote_for %in% c('The Conservative Party', 'The Liberal Party', 'The New Democratic Party'))
 table(ces2015_web_wrk$vote_for)
 ```
 
 ```{r, fig.cap='Graph 0.1'}
+# Bar Graph for Voter responses to question vote_for
 ces2015_web_wrk %>% 
   ggplot(aes(x = vote_for)) + 
   geom_bar() + 
@@ -40,6 +46,7 @@ ces2015_web_wrk %>%
 ```
 
 ```{r, fig.cap='Graph 1.1'}
+# Grouped Bar Graph for Voter responses to question attn_educ
 ces2015_web_wrk %>%
   ggplot(aes(x = attn_educ, fill = vote_for)) + 
   geom_bar(color = 'black', position = 'dodge') + 
@@ -48,6 +55,7 @@ ces2015_web_wrk %>%
 ```
 
 ```{r, fig.cap='Graph 1.2'}
+# Grouped Bar Graph for Voter responses to question spnd_educ
 ces2015_web_wrk %>%
   ggplot(aes(x = spnd_educ, fill = vote_for)) + 
   geom_bar(color = 'black', position = 'dodge') + 
@@ -56,6 +64,7 @@ ces2015_web_wrk %>%
 ```
 
 ```{r, fig.cap='Graph 2.1'}
+# Grouped Bar Graph for Voter responses to question attn_envi
 ces2015_web_wrk %>%
   ggplot(aes(x = attn_envi, fill = vote_for)) + 
   geom_bar(color = 'black', position = 'dodge') + 
@@ -64,6 +73,7 @@ ces2015_web_wrk %>%
 ```
 
 ```{r, fig.cap='Graph 2.2'}
+# Grouped Bar Graph for Voter responses to question spnd_envi
 ces2015_web_wrk %>%
   ggplot(aes(x = spnd_envi, fill = vote_for)) + 
   geom_bar(color = 'black', position = 'dodge') + 
@@ -72,6 +82,7 @@ ces2015_web_wrk %>%
 ```
 
 ```{r, fig.cap='Graph 3.1'}
+# Grouped Bar Graph for Voter responses to question attn_heal
 ces2015_web_wrk %>%
   ggplot(aes(x = attn_heal, fill = vote_for)) + 
   geom_bar(color = 'black', position = 'dodge') + 
@@ -80,6 +91,7 @@ ces2015_web_wrk %>%
 ```
 
 ```{r, fig.cap='Graph 3.2'}
+# Grouped Bar Graph for Voter responses to question spnd_hlth
 ces2015_web_wrk %>%
   ggplot(aes(x = spnd_hlth, fill = vote_for)) + 
   geom_bar(color = 'black', position = 'dodge') + 
